@@ -56,10 +56,13 @@ class MainPageLocators:
     # Кнопка "Конструктор"
     CONSTRUCTOR_BUTTON = (By.XPATH, "//p[text()='Конструктор']")
 
+    # активный переключатель меню Начинки
     ACTIVE_FILLINGS_SECTION = (By.XPATH, "//div[contains(@class,'tab_tab_type_current')]//span[text()='Начинки']")
 
+    # активный переключатель меню Соусы
     ACTIVE_SAUCES_SECTION = (By.XPATH, "//div[contains(@class,'tab_tab_type_current')]//span[text()='Соусы']")
 
+    # активный переключатель меню Булки 
     ACTIVE_BUNS_SECTION = (By.XPATH, "//div[contains(@class,'tab_tab_type_current')]//span[text()='Булки']")
 
 
