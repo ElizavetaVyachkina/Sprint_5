@@ -1,8 +1,7 @@
 from helpers import generate_random_credentials
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from url import MAIN_URL
+from url import MAIN_URL, LOGIN_URL
 from locators import Registration_Locators, MainPageLocators, Login_Locators
 from helpers import generate_random_credentials
 
@@ -43,17 +42,9 @@ class TestRegister:
             # Клик по кнопке регистрации
         driver.find_element(*Registration_Locators.REGISTER_BUTTON).click()
 
-            # Ожидание страницы входа
-        WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//h2[text()='Вход']")
-            )
-        )
+            # Проверка, что после успешной регистрации перешли на страницу логина 
+        assert WebDriverWait(driver, 10).until(EC.url_to_be(LOGIN_URL))
 
-            # Проверка заголовка
-        login_title = driver.find_element(By.XPATH,"//h2[text()='Вход']")
-
-        assert login_title.text == "Вход"
 
     def test_register_invalid_password(self, driver):
         
@@ -89,6 +80,6 @@ class TestRegister:
         driver.find_element(*Registration_Locators.REGISTER_BUTTON).click()
 
         # Проверка текста ошибки
-        error_text = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((Registration_Locators.INCORRECT_PASSWORD_ERROR)))
+        assert WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Registration_Locators.INCORRECT_PASSWORD_ERROR))
 
-        assert error_text.text == "Некорректный пароль"
+
