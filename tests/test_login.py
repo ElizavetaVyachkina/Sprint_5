@@ -1,6 +1,6 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from url import MAIN_URL, LOGIN_URL
+from url import MAIN_URL, LOGIN_URL, PROFILE_URL
 from locators import (
     MainPageLocators,
     Login_Locators,
@@ -26,12 +26,8 @@ class TestLogin:
         # Клик по кнопке "Личный кабинет"
         driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_BUTTON).click()
 
-        WebDriverWait(driver, 10).until(
-            EC.url_contains("https://stellarburgers.education-services.ru/account/profile")
-        )
-
         # Проверка URL
-        assert driver.current_url == "https://stellarburgers.education-services.ru/account/profile"
+        assert WebDriverWait(driver, 10).until(EC.url_to_be(PROFILE_URL))
 
     # Тест №2: Вход через кнопку "Личный кабинет"
     def test_login_from_personal_account_button(self, driver):
@@ -51,12 +47,7 @@ class TestLogin:
         # Клик по кнопке "Личный кабинет"
         driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_BUTTON).click()
 
-        WebDriverWait(driver, 10).until(
-            EC.url_to_be("https://stellarburgers.education-services.ru/account/profile")
-        )
-
-        # Проверка URL
-        assert driver.current_url == "https://stellarburgers.education-services.ru/account/profile"
+        assert WebDriverWait(driver, 10).until(EC.url_to_be(PROFILE_URL))
 
     # Тест №3: Вход через кнопку "Войти" на форме регистрации
     def test_login_from_registration_form(self, driver):
@@ -90,12 +81,7 @@ class TestLogin:
         # Клик по кнопке "Личный кабинет"
         driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_BUTTON).click()
 
-        WebDriverWait(driver, 10).until(
-            EC.url_to_be("https://stellarburgers.education-services.ru/account/profile")
-        )
-
-        # Проверка URL
-        assert driver.current_url == "https://stellarburgers.education-services.ru/account/profile"
+        assert WebDriverWait(driver, 10).until(EC.url_to_be(PROFILE_URL))
 
         
 
@@ -118,9 +104,6 @@ class TestLogin:
         # Клик по кнопке "Личный кабинет"
         driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_BUTTON).click()
 
-        WebDriverWait(driver, 10).until(
-            EC.url_to_be("https://stellarburgers.education-services.ru/account/profile")
-        )
+        assert WebDriverWait(driver, 10).until(EC.url_to_be(PROFILE_URL))
 
-        # Проверка URL
-        assert driver.current_url == "https://stellarburgers.education-services.ru/account/profile"
+        

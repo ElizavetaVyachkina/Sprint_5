@@ -3,6 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from locators import Login_Locators
 from data import Credentials
+from url import MAIN_URL
 
 
 faker = Faker()
@@ -24,4 +25,5 @@ def login_user(driver):
     driver.find_element(*Login_Locators.LOGIN_SUBMIT_BUTTON).click()
 
     # Ожидаем успешную авторизацию (попадание на главную страницу)
-    WebDriverWait(driver, 10).until(EC.url_contains("https://stellarburgers.education-services.ru"))
+    WebDriverWait(driver, 10).until(EC.url_contains(MAIN_URL))
+
