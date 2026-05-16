@@ -1,6 +1,5 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
 from url import MAIN_URL
 from locators import (MainPageLocators)
 
@@ -16,9 +15,9 @@ class TestContructor:
 
         driver.find_element(*MainPageLocators.BUNS_SECTION).click()
 
-        WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class,'tab_tab_type_current')]")))
+        active_tab =  WebDriverWait(driver, 5).until(EC.presence_of_element_located(MainPageLocators.ACTIVE_BUNS_SECTION))
 
-        assert True
+        assert active_tab
 
 
     # Тест перехода в раздел "Соус" 
@@ -29,9 +28,9 @@ class TestContructor:
 
         driver.find_element(*MainPageLocators.SAUCES_SECTION).click()
 
-        WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class,'tab_tab_type_current')]")))
+        active_tab = WebDriverWait(driver, 5).until(EC.presence_of_element_located(MainPageLocators.ACTIVE_SAUCES_SECTION))
 
-        assert True
+        assert active_tab
 
 
 # Тест перехода в раздел "Начинки"
@@ -41,6 +40,6 @@ class TestContructor:
 
         driver.find_element(*MainPageLocators.FILLINGS_SECTION).click()
 
-        WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class,'tab_tab_type_current')]")))
+        active_tab = WebDriverWait(driver, 5).until(EC.presence_of_element_located(MainPageLocators.ACTIVE_FILLINGS_SECTION))
 
-        assert True
+        assert active_tab

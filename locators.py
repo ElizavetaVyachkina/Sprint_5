@@ -56,5 +56,11 @@ class MainPageLocators:
     # Кнопка "Конструктор"
     CONSTRUCTOR_BUTTON = (By.XPATH, "//p[text()='Конструктор']")
 
+    ACTIVE_FILLINGS_SECTION = (By.XPATH, "//div[contains(@class,'tab_tab_type_current')]//span[text()='Начинки']")
+
+    ACTIVE_SAUCES_SECTION = (By.XPATH, "//div[contains(@class,'tab_tab_type_current')]//span[text()='Соусы']")
+
+    ACTIVE_BUNS_SECTION = (By.XPATH, "//div[contains(@class,'tab_tab_type_current')]//span[text()='Булки']")
+
 
 
