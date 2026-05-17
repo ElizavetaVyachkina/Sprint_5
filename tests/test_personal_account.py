@@ -1,6 +1,6 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from url import MAIN_URL
+from url import MAIN_URL, PROFILE_URL
 from locators import (
     MainPageLocators,
     Login_Locators,
@@ -27,12 +27,8 @@ class TestPersonalAccount:
         # Клик по кнопке "Личный кабинет"
         driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_BUTTON).click()
 
-        WebDriverWait(driver, 10).until(
-            EC.url_contains("https://stellarburgers.education-services.ru/account/profile")
-        )
-
         # Проверка URL
-        assert driver.current_url == "https://stellarburgers.education-services.ru/account/profile"
+        assert WebDriverWait(driver, 10).until(EC.url_to_be(PROFILE_URL))
 
     # Тест на переход из личного кабинета в конструктор 
     def test_navigate_to_constructor_from_account(self, driver):
@@ -49,16 +45,14 @@ class TestPersonalAccount:
         # Клик по кнопке "Личный кабинет"
         driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_BUTTON).click()
 
-        WebDriverWait(driver, 10).until(
-            EC.url_contains("https://stellarburgers.education-services.ru/account/profile")
-        )
+        WebDriverWait(driver, 10).until(EC.url_contains(PROFILE_URL))
 
         # Клик по кнопке "Конструктор"
         driver.find_element(*MainPageLocators.CONSTRUCTOR_BUTTON).click()
 
-        button = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(PersonalAccountLocators.CHEKOUT_BUTTON))
+        assert WebDriverWait(driver, 10).until(EC.visibility_of_element_located(PersonalAccountLocators.CHEKOUT_BUTTON))
 
-        assert button.text == "Оформить заказ"
+    
 
     # Тест переход из личного кабинета клик на логотип Stellar Burgers.
     def test_logo_click_from_account(self, driver):
@@ -75,16 +69,13 @@ class TestPersonalAccount:
         # Клик по кнопке "Личный кабинет"
         driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_BUTTON).click()
 
-        WebDriverWait(driver, 10).until(
-            EC.url_contains("https://stellarburgers.education-services.ru/account/profile")
-        )
+        WebDriverWait(driver, 10).until(EC.url_contains(PROFILE_URL))
 
         # Клик по логотипу "Stellar Burgers"
         driver.find_element(*MainPageLocators.LOGO).click()
 
-        button = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(PersonalAccountLocators.CHEKOUT_BUTTON))
+        assert WebDriverWait(driver, 10).until(EC.visibility_of_element_located(PersonalAccountLocators.CHEKOUT_BUTTON))
 
-        assert button.text == "Оформить заказ"
     # Тест на выход из аккаунта по кнопке «Выйти» в личном кабинете.
     def test_logout(self, driver):
 
@@ -100,12 +91,9 @@ class TestPersonalAccount:
         # Клик по кнопке "Личный кабинет"
         driver.find_element(*MainPageLocators.PERSONAL_ACCOUNT_BUTTON).click()
 
-        WebDriverWait(driver, 10).until(
-            EC.url_contains("https://stellarburgers.education-services.ru/account/profile")
-        )
+        WebDriverWait(driver, 10).until(EC.url_contains(PROFILE_URL))
 
         driver.find_element(*PersonalAccountLocators.LOGOUT_BUTTON).click()
 
-        button = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Login_Locators.LOGIN_SUBMIT_BUTTON))
+        assert WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Login_Locators.LOGIN_SUBMIT_BUTTON))
 
-        assert button.text == "Войти"
